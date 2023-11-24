@@ -12,18 +12,13 @@ module.exports = {
         "black-200": "white",
         "white-100": "white",
       },
-      boxShadow: {
-        card: "0px 35px 120px -15px #363636",
-      },
       screens: {
         'sm': '640px',
         // => @media (min-width: 640px) { ... }
   
         'md': '768px',
         // => @media (min-width: 768px) { ... }
-        
-        'ipad':'800px',
-  
+
         'lg': '1024px',
         // => @media (min-width: 1024px) { ... }
   
@@ -34,8 +29,7 @@ module.exports = {
         // => @media (min-width: 1536px) { ... }
       },
       backgroundImage: {
-        "hero-pattern": "url('/src/assets/Bogotaazul.png')",
-        'Nav': "url('bgNav.png')"
+        'Nav': "url('/src/assets/bgNav.png')",
       },
     },
   },

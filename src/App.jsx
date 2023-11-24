@@ -2,12 +2,13 @@ import { BrowserRouter } from "react-router-dom";
 
 import { Intro, Hero, Navbar, Autores, Mapa, MapaTitle, HeroPhone } from "./components";
 import { styles } from "./Styles";
-import React, { useState } from "react";
-import { close, logo_loclaidades } from "./assets";
+import React, { useState, } from "react";
+import { close, bosa } from "./assets";
 import { motion } from "framer-motion";
-import {MapaVariant } from "./utils/motion";
+import USME from "./assets/USME.png";
 
 const App = () => {
+  
   const MAX_SCALE = 10;
   const localidades = 20;
   const DEFAULT_SCALE = 1;
@@ -20,7 +21,6 @@ const App = () => {
   function ZeroVector() {
     return Array.from(Array(localidades), () => 0);
   }
-
   const [x, setX] = useState(ZeroVector());
   const [y, setY] = useState(ZeroVector());
   const [overlayOpacity, setOverlayOpacity] = useState(0);
@@ -63,7 +63,6 @@ const App = () => {
 
   const handleLocalidadClick = (index, show, personalScale, x, y, localidad, frase, url, texto) => {
 
-
     console.log(index);
     console.log(personalScale)
     setlocalidad(localidad);
@@ -92,6 +91,7 @@ const App = () => {
     setScale(scale_vector);
   }
   return (
+    
     <BrowserRouter>
       <div className='relative z-0'>
         <Navbar />
@@ -108,7 +108,7 @@ const App = () => {
         <div>
           <MapaTitle />
         </div>
-        <div className='relative h-[80vh] ipad:h-[90vh] sm:h-[190vh] md:h-[150vh] lg:h-[110vh] xl:h-[90vh] ' >
+        <div className='relative h-[80vh] ipad:h-[90vh] sm:h-[190vh] md:h-[120vh] lg:h-[110vh] xl:h-[90vh] ' >
           <motion.div
             id="info_localidad"
             style={
@@ -119,20 +119,32 @@ const App = () => {
             delay:0.1}}>
             <div className="sm:px-16 px-6 sm:py-16 py-10 max-w-7xl mx-auto relative z-0">
               <main role="main" className=" flex-column inner cover">
-                <h1 className={styles.sectionHeadText} style={{ textAlign: "center" }}>{localidad} </h1>
+                <h1 className={styles.sectionHeadText} style={{ textAlign: "center", fontFamily:"crazy" }}>{localidad} </h1>
+                {currentIndex == 15 ? (
+                    <p className={`${styles.ParagraphText} mt-4 text-secondary max-w-1xl leading-[30px] text-center`}>
+                    “Yo también fui un <span className="italic">fou de la rue</span>, pero ahora soy el ejemplo de que hay arte detrás de un loco”
+                    </p>
+                ):
+                (
                 <p className={`${styles.ParagraphText} mt-4 text-secondary max-w-1xl leading-[30px] `}>
-                  {Frase1}
-                </p>
+                {Frase1}
+              </p>
+              )
+                }
                 <div align="center">
 
-                  {showVideo == 1 && (
+                  {showVideo == 1 ? (
                     <iframe
-                      className='mt-10 rounded-lg  border-[#0B144B] border-[15px] relative text-align-center aspect-video sm:w-[80%] md:w-[70%] ipad:w-[90%]  lg:w-[90%] xl:w-[50%]'
-
+                      className='mt-10 rounded-lg  border-[#0B144B] border-[3px] relative text-align-center aspect-video sm:w-[80%] md:w-[70%] ipad:w-[90%]  lg:w-[90%] xl:w-[50%]'
                       src={`${urlLocalidad}?controls=1&fs=1&rel=0&modestbranding=1&autoplay=${overlayOpacity ? 1: 0}`}
                       allowFullScreen
                       >
                     </iframe>
+                  ):(
+                    <img
+                      src={`${localidad}.png`}
+                      className='w-[100%] md:w-[40%] lg:w-[50%] sm:w-[80%] absolute top-[15vh] left-[5vw] lg:top-[13vh] lg:left-[35vw] md:top-[13vh] md:left-[50vw]'
+                    />
                   )}
                 </div >
                 <div className="absolute top-0 right-0 mr-5">
@@ -150,14 +162,14 @@ const App = () => {
 
           </motion.div>
 
-          <motion.div variants={MapaVariant()}
-          className='relative h-[80vh] md:h-[90vh] sm:h-[90vh] xl:h-[90vh] lg:h-[90vh] '
+          <div
+          className='relative  h-[80vh] md:h-[90vh] sm:h-[95vh] xl:h-[90vh] lg:h-[90vh] '
           >
             <Mapa DEFAULT_SCALE={DEFAULT_SCALE} HOVER_SCALE={HOVER_SCALE} Scale={Scale} x_mapa={x} y_mapa={y} handleLocalidadClick={handleLocalidadClick} />
-          </motion.div>
+          </div>
         </div>
         <div className="mt-10">
-          <Autores />
+          {/*<Autores />*/}
         </div>
       </div>
     </BrowserRouter>
